@@ -5,6 +5,7 @@
 \*******************************************************************************/
 
 var gulp = require("gulp"),																// gulp core
+		jade = require("gulp-jade"),													// jade compiler
 		sass = require('gulp-sass'),													// sass compiler
 		gulpif = require('gulp-if'),													// conditionally run a task
 		csso = require('gulp-csso'),													// css optimization
@@ -12,6 +13,7 @@ var gulp = require("gulp"),																// gulp core
 		uncss = require('gulp-uncss'),												// remove all unussed styles
 		clean = require('gulp-clean'),												// removing files and folders
 		rename = require("gulp-rename"),											// rename files
+		prettify = require('gulp-prettify'),									// prettify, format, beautify HTML
 		notify = require("gulp-notify"),											// error reporternotify
 		useref = require('gulp-useref'),											// parse build blocks in HTML files to replace references
 		uglify = require('gulp-uglify'),											// uglifies the js
@@ -37,25 +39,66 @@ gulp.task('connect', ['watch'], function() {							// files to inject
 	});
 });
 
+gulp.task('connect-jade', ['watch-jade'], function() {							// files to inject
+	browserSync.init({
+		server: {
+			baseDir: "./app/"																		// base dir
+		}
+	});
+});
+
+/*******************************************************************************\
+			COMPILE JADE IN TO HTML
+\*******************************************************************************/
+
+gulp.task('jade', function() {
+  gulp.src('./app/template/pages/*.jade')									// get the files
+    .pipe(jade())
+    .pipe(plumber({errorHandler: notify.onError({
+			 title:    'Ошибка :(',
+			 message:  '<%= error.message %>'
+			})}))
+    .pipe(prettify({indent_size: 2}))											// prettify file
+    .pipe(gulp.dest('./app/'))														// where to put the file
+    .pipe(browserSync.stream());
+});
+
+gulp.task('html', function() {
+  gulp.src('./app/index.html')														// get the files
+    .pipe(gulp.dest('./app/'))														// where to put the file
+    .pipe(browserSync.stream());
+});
+
 /*******************************************************************************\
 		3.	WATCHER (WATCHING FILE CHANGES)
 \*******************************************************************************/
-
-gulp.task('watch', function () {
-	gulp.watch(['./app/*.html'], ['html']),									// watching changes in HTML
+gulp.task('watch-jade', function () {
+	gulp.watch(['./app/template/**/*.jade'], ['jade']),			// watching changes in Jade
+	gulp.watch('bower.json', ['wiredep']);									// watching changes in Wiredep
 	gulp.watch(['./app/sass/*.scss'], ['scss']),						// watching changes in SASS
 	gulp.watch(['./app/js/*.js'], ['js']);									// watching changes in JS
 });
 
+
+gulp.task('watch', function () {
+	gulp.watch('./app/index.html', ['html']),								// watching changes in HTML
+	gulp.watch(['./app/sass/*.scss'], ['scss']),						// watching changes in SASS
+	gulp.watch(['./app/js/*.js'], ['js']);									// watching changes in JS
+});
+
+
 /*******************************************************************************\
-		4.	HTML TASKS
+		5.	WIREDEP TASKS
 \*******************************************************************************/
 
-gulp.task('html', function () {
-	gulp.src('./app/index.html')														// get the files
-		.pipe(gulp.dest('./app/'))														// where to put the file
-		.pipe(browserSync.stream());													// browsersync stream
+gulp.task('wiredep', function () {
+	gulp.src('./app/template/pages/*.jade')									// get the files
+		.pipe(wiredep({
+			ignorePath: /^(\.\.\/)*\.\./												// ignore dotted in 'src'
+		}))
+		.pipe(gulp.dest('./app/template/pages/'))							// where to put the changes
 });
+
 
 /*******************************************************************************\
 		5.	SASS TASKS
@@ -86,7 +129,7 @@ gulp.task('js', function() {
 		7.	IMAGES TASKS
 \*******************************************************************************/
 
-//sprite task 
+//sprite task
 gulp.task('sprite', function () {
   var spriteData = gulp.src('./app/img/sprite/*.png').pipe(spritesmith({
     imgName: 'sprite.png',
@@ -188,6 +231,12 @@ gulp.task('build', ['clean'], function () {
 
 });
 
+// gulp.task('jade', function() {
+// 	gulp.start('connect-jade');
+// 	gulp.start('watch-jade');
+// })
+
+gulp.task('gulp-jade', ['connect-jade', 'watch-jade']);
 /*******************************************************************************\
 		12.	DEFAULT TASKS
 \*******************************************************************************/
