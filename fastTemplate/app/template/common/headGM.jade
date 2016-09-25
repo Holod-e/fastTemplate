@@ -1,0 +1,34 @@
+head
+	meta(charset='UTF-8')
+	meta(http-equiv='X-UA-Compatible', content='IE=edge')
+	block title
+		title Заголовок
+
+	// SEO
+	meta(property="og:title", content="title")
+	meta(property="og:description" content="Описание")
+	meta(property="og:image" content="http://geniusmarketing.me/pic.png")
+	meta(property="og:url" content="http://geniusmarketing.me/")
+	meta(property="fb:admins" content="1510615147")
+	meta(property="fb:app_id" content="473200492729081")
+
+	//- расскоментить vievport при адаптивном дизайне
+	// meta(name='viewport', content='width=device-width, initial-scale=1, maximum-scale=1')
+
+	<!-- build:css css/libs.min.css -->
+	link(rel="stylesheet", href="css/animate.css")
+	link(rel="stylesheet", href="css/bootstrapGM.css")
+	link(rel="stylesheet", href="css/tingle.css")
+	<!-- endbuild -->
+
+	<!-- build:css css/main.min.css -->
+	link(rel='stylesheet', href='css/fonts.css')
+	link(rel='stylesheet', href='css/main.css')
+	<!-- endbuild -->
+
+	script(src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js")
+	<!-- VK-script -->
+	script(src="//vk.com/js/api/openapi.js?116")
+	script
+		| VK.init({apiId: 3786941, onlyWidgets: true});
+
