@@ -7,6 +7,6 @@ fast template for freelance
   4. gulp build - to build project to dist directory (minify css, js, optimisation img and onther)
 
 #some info
-  default set GeniusMarketing starting template
-  to change template, open app/teplate/pages/index.jade and change name of template in this file to freelance.jade
+  1. default set GeniusMarketing starting template
+  2. to change template, open app/teplate/pages/index.jade and change name of template in this file to freelance.jade
 
