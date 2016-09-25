@@ -8,11 +8,12 @@
 \*********************************************/
 @import "_buttons.scss";
 
+
 /*********************************************\
 		MAIN STYLE
 \*********************************************/
 body {
-	font-family: "HelveticaNeueCyr-Roman", Helvetica, Arial, sans-serif;
+	font-family: "OpenSansRegular", Helvetica, Arial, sans-serif;
 	font-size: 14px;
 	line-height: 1.42857143;
 	min-width: 320px;
@@ -21,12 +22,6 @@ body {
 	background-color: #ffffff;
 }
 
-body {
-	font-size: 16px;
-	line-height: 23px;
-	background:   url(../img/img.png) 50% 0 no-repeat;
-	font-family: sans-serif;
-}
 ////Удалить или закоментировать при адаптивном дизайне!//////////////
 // .container {width: 960px !important;}
 //////////////////////////////////////////////////////////////////////
@@ -35,10 +30,6 @@ body {
 	display: none;
 }
 
-.carousel img {
-	width: 100%;
-	height: auto;
-}
 
 .wrapper {
 	margin: 0 auto;
@@ -53,12 +44,12 @@ br.sm {display: none;}
 br.xs {display: none;}
 
 //validatorGM styles//
- form input.error {
- 	box-shadow: inset 0px 0px 20px 1px rgba(255,0,0,0.3);
- 	border: 2px solid red !important;}
- form input.not_error {
- 	box-shadow: inset 0px 0px 20px 1px rgba(100,255,100,0.3);
- 	border: 2px solid #99FF99 !important;}
+form input.error {
+	box-shadow: inset 0px 0px 20px 1px rgba(255,0,0,0.3);
+	border: 2px solid red !important;}
+form input.not_error {
+	box-shadow: inset 0px 0px 20px 1px rgba(100,255,100,0.3);
+	border: 2px solid #99FF99 !important;}
 
 /*********************************************\
 		@IMPORT HEADER

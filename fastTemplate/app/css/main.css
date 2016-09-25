@@ -9,7 +9,7 @@
 /*********************************************		MAIN STYLE
 \*********************************************/
 body {
-  font-family: "HelveticaNeueCyr-Roman", Helvetica, Arial, sans-serif;
+  font-family: "OpenSansRegular", Helvetica, Arial, sans-serif;
   font-size: 14px;
   line-height: 1.42857143;
   min-width: 320px;
@@ -17,18 +17,8 @@ body {
   position: relative;
   background-color: #ffffff; }
 
-body {
-  font-size: 16px;
-  line-height: 23px;
-  background: url(../img/img.png) 50% 0 no-repeat;
-  font-family: sans-serif; }
-
 .hidden {
   display: none; }
-
-.carousel img {
-  width: 100%;
-  height: auto; }
 
 .wrapper {
   margin: 0 auto; }

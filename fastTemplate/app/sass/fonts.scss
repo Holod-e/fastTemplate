@@ -7,5 +7,6 @@
 		FONTS
 \*********************************************/
 //пример подключения шрифта (для быстрого подкл. используйте snippet iff)
-@include font-face("Roboto-Medium", "../fonts/Roboto-Medium/Roboto-Medium", $file-formats: eot woff ttf);
-@include font-face("HelveticaNeueCyr-Roman", "../fonts/HelveticaNeueCyr-Roman/HelveticaNeueCyr-Roman", $file-formats: eot woff ttf);
+@include font-face("OpenSansRegular", "../fonts/OpenSansRegular/OpenSansRegular", $file-formats: eot woff ttf);
+@include font-face("GothamProRegular", "../fonts/GothamProRegular/GothamProRegular", $file-formats: eot woff ttf);
+@include font-face("GothamProBold", "../fonts/GothamProBold/GothamProBold", $file-formats: eot woff ttf);
