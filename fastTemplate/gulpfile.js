@@ -50,14 +50,22 @@ gulp.task('connect-jade', ['watch-jade'], function() {							// files to inject
 /*******************************************************************************\
 			COMPILE JADE IN TO HTML
 \*******************************************************************************/
+function log(error) {
+    console.log([
+        '',
+        "----------ERROR MESSAGE START----------",
+        ("[" + error.name + " in " + error.plugin + "]"),
+        error.message,
+        "----------ERROR MESSAGE END----------",
+        ''
+    ].join('\n'));
+    this.end();
+}
+
 
 gulp.task('jade', function() {
   gulp.src('./app/template/pages/*.jade')									// get the files
-    .pipe(jade())
-    .pipe(plumber({errorHandler: notify.onError({
-			 title:    'Ошибка :(',
-			 message:  '<%= error.message %>'
-			})}))
+    .pipe(jade()).on('error', log)
     .pipe(prettify({indent_size: 2}))											// prettify file
     .pipe(gulp.dest('./app/'))														// where to put the file
     .pipe(browserSync.stream());
