@@ -1,17 +1,20 @@
-/*********************************************\
-		@IMPORT VARIABLES
-\*********************************************/
+
+@import "bourbon";
+/* ---------- FONTS ---------- */
+//пример подключения шрифта (для быстрого подкл. используйте snippet iff)
+@include font-face("OpenSansRegular", "../fonts/OpenSansRegular/OpenSansRegular", $file-formats: eot woff ttf);
+@include font-face("GothamProRegular", "../fonts/GothamProRegular/GothamProRegular", $file-formats: eot woff ttf);
+@include font-face("GothamProBold", "../fonts/GothamProBold/GothamProBold", $file-formats: eot woff ttf);
+
+/* ---------- @IMPORT VARIABLES ---------- */
 @import "_variables.scss";
 
-/*********************************************\
-		@IMPORT BUTTONS
-\*********************************************/
+
+/* ---------- @IMPORT BUTTONS ---------- */
 @import "_buttons.scss";
 
 
-/*********************************************\
-		MAIN STYLE
-\*********************************************/
+/* ----------MAIN STYLE---------- */
 body {
 	font-family: "OpenSansRegular", Helvetica, Arial, sans-serif;
 	font-size: 14px;
@@ -51,25 +54,18 @@ form input.not_error {
 	box-shadow: inset 0px 0px 20px 1px rgba(100,255,100,0.3);
 	border: 2px solid #99FF99 !important;}
 
-/*********************************************\
-		@IMPORT HEADER
-\*********************************************/
+
+/* ----------IMPORT HEADER STYLES---------- */
 @import "_header.scss";
 
-/*********************************************\
-		TYPOGRAPHY
-\*********************************************/
+/* ----------TYPOGRAPHY---------- */
 
-/*********************************************\
-		SECTIONS
-\*********************************************/
 
-/*********************************************\
-		@IMPORT FOOTER
-\*********************************************/
+/* ----------SECTIONS---------- */
+
+
+/* ----------IMPORT FOOTER STYLES---------- */
 @import "_footer.scss";
 
-/*********************************************\
-		@IMPORT MEDIA
-\*********************************************/
+/* ----------IMPORT MEDIA STYLES---------- */
 @import "_media.scss";
