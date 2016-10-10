@@ -20,6 +20,7 @@ var gulp = require("gulp"),																// gulp core
 		bourbon = require('node-bourbon'),										// bourbon libruary
 		plumber = require("gulp-plumber"),										// error reporter
 		imagemin = require('gulp-imagemin'),									// img optimisation
+		sourcemaps = require('gulp-sourcemaps'),
 		wiredep = require('wiredep').stream,									// bower dependencies to your source code
 		spritesmith = require('gulp.spritesmith'),						// spretes generator
 		autoprefixer = require('gulp-autoprefixer'),					// sets missing browserprefixes
@@ -114,12 +115,14 @@ gulp.task('wiredep', function () {
 
 gulp.task('scss', function () {
 	gulp.src('./app/sass/*.scss')														// get the files
+		.pipe(sourcemaps.init())
 		.pipe(plumber({errorHandler: notify.onError({
 			 title:    'Ошибка :(',
 			 message:  '<%= error.message %>'
 			})}))
 		.pipe(sass({includePaths: require('node-bourbon').includePaths}))
 		.pipe(autoprefixer({browsers: ['last 3 versions'], cascade: false}))
+		.pipe(sourcemaps.write())
 		.pipe(gulp.dest('app/css'))														// where to put the file
 		.pipe(browserSync.stream());													// browsersync stream
 });
