@@ -28,7 +28,7 @@
     "gulp.spritesmith": "^6.2.1",
     "imagemin-jpeg-recompress": "^4.3.0",
     "imagemin-pngquant": "^4.2.2",
-    "node-bourbon": "^4.2.3",
+    "node-bourbon": "4.2.3",
     "wiredep": "^4.0.0"
   }
 }
