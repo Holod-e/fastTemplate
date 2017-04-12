@@ -11,13 +11,16 @@
     <meta property="og:url" content="http://geniusmarketing.me/">
     <meta property="fb:admins" content="1510615147">
     <meta property="fb:app_id" content="473200492729081">
-    <!-- meta(name='viewport', content='width=device-width, initial-scale=1, maximum-scale=1')-->
+    <meta name='viewport' content='width=device-width, initial-scale=1, maximum-scale=1'>
     <!-- build:css css/libs.min.css -->
     <link rel="stylesheet" href="css/animate.css">
     <link rel="stylesheet" href="css/bootstrapGM.css">
     <link rel="stylesheet" href="css/tingle.css">
     <link rel="stylesheet" href="css/hover.css">
     <link rel="stylesheet" href="css/font-awesome.css">
+    <link rel="stylesheet" href="css/intlTelInput.css">
+    <link rel='stylesheet' href='css/jquery.countdown.css'>
+    <link rel='stylesheet' href='css/popup_style.css'>
     <!-- endbuild -->
     <!-- build:css css/main.min.css -->
     <link rel="stylesheet" href="css/mainGM.css">
@@ -117,6 +120,17 @@
     </footer>
     <!-- END FOOTER-->
     <!-- HIDDEN ELEMENTS (MODALS) -->
+    <div id="modal-contact" class="modal-overlay">
+      <div class="modal-content">
+        <div class="close-button">
+          <div class="one"></div>
+          <div class="two"></div>
+        </div>
+        <!-- content -->
+        <div id="video-popup"></div>
+        <!-- end content -->
+      </div>
+
     <div id="politika_conf" class="tingle-modal">
       <div class="modal-header">
         <h4 class="modal-title">Политика конфиденциальности</h4>
@@ -357,36 +371,46 @@
     <script src="js/wow.min.js"></script>
     <script src="js/tingle.js"></script>
     <script src="js/AnchorScroller.js"></script>
-    <script src="js/jquery.browser.min.js"></script>
-    <script src="js/jquery.plugins.js"></script>
     <script src="js/cookie.js"></script>
     <script src="js/jquery.cookie.js"></script>
+    <script src="js/intlTelInput.min.js"></script>
+    <script src='js/jquery.countdown.js'></script>
+    <script src='js/script.js'></script>
     <script src="js/validatorGM.js"></script>
+    <script src='js/popup_script.js'></script>
     <!-- endbuild -->
     <!-- build:js js/common.min.js -->
     <script src="js/common.js"></script>
     <!-- endbuild -->
+    <script>
+      $("input.phone").intlTelInput({
+          utilsScript:'js/utils.js',
+          defaultCountry: 'auto',
+          separateDialCode: false,
+            nationalMode: false,
+          preferredCountries: ['ua', 'ru', 'by', 'kz']
+      });
+    </script>
     <!--Validation script -->
     <script>
-      function validate(formid, idexport)
+      function validate(formid, idexport, gtmPush)
       {
         var output = false;
         var name, email, phone;
         form = $(formid); // указать ID формы !
         form.find('input.name').focus();
         form.find('input.email').focus();
-        form.find('input.phone1').focus();
-        form.find('input.phone2').focus();
-        form.find('input.phone3').focus();
+        form.find('input.phone').focus();
         form.find('.subm1').focus();
         name = form.find('.name').val();
         email = form.find('.email').val();
-        phone = form.find('.phone1').val() + form.find('.phone2').val() + form.find('.phone3').val();
+        phone = form.find('.phone').val();
+        phone = phone.replace(/\s/g, '');
         $(".last1").val(phone);
         exp = 'crm/' + idexport;
         // После того, как мы нажали кнопку "Отправить", делаем проверку,
-        // если кол-во полей с классов .not_error равно 5(так как у нас всего 5 полей), то есть все поля заполнены верно,
-        if ($('.not_error').length == 5)
+        // если кол-во полей с классов .not_error равно 3(так как у нас всего 3 поля), то есть все поля заполнены верно,
+        if ($('.not_error').length == 3)
         {
           // после успешной проверки отправляем форму и ставим куки
           $.ajax(
@@ -406,9 +430,8 @@
               setCookie('name', $('.name').val(), 365);
               setCookie('email', $('.email').val(), 365);
               setCookie('last1', $('.last1').val(), 365);
-              setCookie('phone1', $('.phone1').val(), 365);
-              setCookie('phone2', $('.phone2').val(), 365);
-              setCookie('phone3', $('.phone3').val(), 365);
+              setCookie('phone', $('.phone1').val(), 365);
+              dataLayer.push({'event' : gtmPush});
               output = true;
             }
           });
@@ -430,19 +453,19 @@
         jQuery("#user-country").text(ymaps.geolocation.country);
         if (getCookie("phone1"))
         {
-          $(".phone1").val(getCookie("phone1"));
+          $("input.phone").val(getCookie("phone"));
         }
         else if (ymaps.geolocation.country === 'Украина')
         {
-          $('.phone1').val('+38');
+          $('input.phone').val('+38');
         }
         else if (ymaps.geolocation.country === "Россия")
         {
-          $('.phone1').val('+7');
+          $('input.phone').val('+7');
         }
         else
         {
-          $('.phone1').val('+37');
+          $('input.phone').val('+37');
         }
       });
     </script>

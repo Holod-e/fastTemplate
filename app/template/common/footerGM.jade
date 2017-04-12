@@ -48,6 +48,13 @@ footer.main-footer
 // END FOOTER
 
 <!-- HIDDEN ELEMENTS (MODALS) -->
+#modal-contact.modal-overlay
+	.modal-content
+		.close-button
+			.one
+			.two
+		#video-popup
+
 .tingle-modal#politika_conf
 	.modal-header
 		h4.modal-title Политика конфиденциальности
@@ -507,86 +514,101 @@ footer.main-footer
 script(src='js/wow.min.js')
 script(src='js/tingle.js')
 script(src='js/AnchorScroller.js')
-script(src="js/jquery.browser.min.js")
-script(src="js/jquery.plugins.js")
 script(src='js/cookie.js')
 script(src='js/jquery.cookie.js')
 script(src='js/validatorGM.js')
+script(src='js/intlTelInput.min.js')
+script(src='js/script.js')
+script(src='js/popup_script.js')
 <!-- endbuild -->
 
 <!-- build:js js/common.min.js -->
 script(src='js/common.js')
 <!-- endbuild -->
-
+script.
+	$("input.phone").intlTelInput({
+			utilsScript:'js/utils.js',
+			defaultCountry: 'auto',
+			separateDialCode: false,
+				nationalMode: false,
+			preferredCountries: ['ua', 'ru', 'by', 'kz']
+	});
 <!--Validation script -->
 script.
-	function validate(formid,idexport){
-		var output = false;
-		var name,email,phone;
-		form = $(formid); // указать ID формы !
-		form.find('input.name').focus();
-		form.find('input.email').focus();
-		form.find('input.phone1').focus();
-		form.find('input.phone2').focus();
-		form.find('input.phone3').focus();
-		form.find('.subm1').focus();
-		name=form.find('.name').val();
-		email=form.find('.email').val();
-		phone=form.find('.phone1').val() + form.find('.phone2').val() + form.find('.phone3').val();
-		$(".last1").val(phone);
-		exp='crm/' + idexport;
-		// После того, как мы нажали кнопку "Отправить", делаем проверку,
-		// если кол-во полей с классов .not_error равно 5(так как у нас всего 5 полей), то есть все поля заполнены верно,
-		if($('.not_error').length == 5)
-		{
-		// после успешной проверки отправляем форму и ставим куки
-			$.ajax({
-				type: "POST",
-				url: 'crm/export.php',
-				async: false,
-				data: {
-					name: name,
-					email: email,
-					phone: phone,
-					idexport: idexport
-				},
-				success: function () {
-					setCookie('name', $('.name').val(), 365);
-					setCookie('email', $('.email').val(), 365);
-					setCookie('last1', $('.last1').val(), 365);
-					setCookie('phone1', $('.phone1').val(), 365);
-					setCookie('phone2', $('.phone2').val(), 365);
-					setCookie('phone3', $('.phone3').val(), 365);
-					output = true;
+	 function validate(formid, idexport, gtmPush)
+			{
+				var output = false;
+				var name, email, phone;
+				form = $(formid); // указать ID формы !
+				form.find('input.name').focus();
+				form.find('input.email').focus();
+				form.find('input.phone').focus();
+				form.find('.subm1').focus();
+				name = form.find('.name').val();
+				email = form.find('.email').val();
+				phone = form.find('.phone').val();
+				phone = phone.replace(/\s/g, '');
+				$(".last1").val(phone);
+				exp = 'crm/' + idexport;
+				// После того, как мы нажали кнопку "Отправить", делаем проверку,
+				// если кол-во полей с классов .not_error равно 3(так как у нас всего 3 поля), то есть все поля заполнены верно,
+				if ($('.not_error').length == 3)
+				{
+					// после успешной проверки отправляем форму и ставим куки
+					$.ajax(
+					{
+						type: "POST",
+						url: 'crm/export.php',
+						async: false,
+						data:
+						{
+							name: name,
+							email: email,
+							phone: phone,
+							idexport: idexport
+						},
+						success: function()
+						{
+							setCookie('name', $('.name').val(), 365);
+							setCookie('email', $('.email').val(), 365);
+							setCookie('last1', $('.last1').val(), 365);
+							setCookie('phone', $('.phone1').val(), 365);
+							dataLayer.push({'event' : gtmPush});
+							output = true;
+						}
+					});
 				}
-			});
-		}
-		else
-		{
-		form.find('input.error').first().focus();
-		}
-		return output;
-	};
+				else
+				{
+					form.find('input.error').first().focus();
+				}
+				return output;
+			};
 <!-- END Validation script -->
 
 <!--auto country code srcipt -->
 script.
-	$(window).load(function () {
+	$(window).load(function()
+	{
 		jQuery("#user-city").text(ymaps.geolocation.city);
 		jQuery("#user-region").text(ymaps.geolocation.region);
 		jQuery("#user-country").text(ymaps.geolocation.country);
-		if(getCookie("phone1")){
-					$(".phone1").val(getCookie("phone1"));
-				}
-		else if(ymaps.geolocation.country === 'Украина'){
-			$('.phone1').val('+38');
+		if (getCookie("phone1"))
+		{
+			$("input.phone").val(getCookie("phone"));
 		}
-		else if(ymaps.geolocation.country === "Россия") {
-						$('.phone1').val('+7');
-				}
-				else{
-					$('.phone1').val('+37');
-				}
+		else if (ymaps.geolocation.country === 'Украина')
+		{
+			$('input.phone').val('+38');
+		}
+		else if (ymaps.geolocation.country === "Россия")
+		{
+			$('input.phone').val('+7');
+		}
+		else
+		{
+			$('input.phone').val('+37');
+		}
 	});
 script(src="//api-maps.yandex.ru/2.0-stable/?load=package.standard&lang=ru-RU")
 <!-- end auto country code script -->

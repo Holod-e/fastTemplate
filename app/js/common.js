@@ -15,25 +15,7 @@ $(document).ready(function() {
 });
 
 
-$(function(){
 
-  $('.NumGroup').groupinputs();
-
-  $('.NumGroup').on('input propertychange', function(e) {
-      var elem = $(e.target),
-              value = elem.val(),
-              caret = elem.caret(),
-              newValue = value.replace(/[^0-9+()-]/g, ''),
-              valueDiff = value.length - newValue.length;
-
-      if (valueDiff) {
-          elem
-                  .val(newValue)
-                  .caret(caret.start - valueDiff, caret.end - valueDiff);
-      }
-  });
-
-});
 
 // cookie script
 	 function getCookie(cname) {
@@ -63,6 +45,7 @@ $(function(){
       $(window).load(function() {
           $("input.name").val(getCookie("name"));
           $("input.email").val(getCookie("email"));
+          $("input.phone").val(getCookie("phone"));
           $("input.phone1").val(getCookie("phone1"));
           $("input.phone2").val(getCookie("phone2"));
           $("input.phone3").val(getCookie("phone3"));

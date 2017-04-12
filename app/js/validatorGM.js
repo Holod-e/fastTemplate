@@ -36,6 +36,19 @@
                       $(this).removeClass('not_error').addClass('error');
                    }
                break;
+               // Проверка поля "Телефон "
+               case 'phone':
+                   if(val != '' && val.length <= 10)
+                   {
+                     $(this).removeClass('error');
+                      $(this).addClass('not_error');
+                   }
+                   else
+                   {
+                      $(this).removeClass('not_error');
+                       $(this).addClass('error');
+                   }
+               break;
 
               // Проверка поля "Телефон1 код страны"
               case 'phone1':
@@ -82,8 +95,8 @@
            } // end switch(...)
         }
          // Устанавливаем обработчик потери фокуса для всех полей ввода текста
-           $('input.name, input.email, input.phone1, input.phone2, input.phone3').unbind().blur(validateForm); // end blur()
-           $('input.name, input.email, input.phone1, input.phone2, input.phone3').keypress(validateForm); // end blur()
+           $('input.name, input.email, input.phone,  input.phone1, input.phone2, input.phone3').unbind().blur(validateForm); // end blur()
+           $('input.name, input.email, input.phone,  input.phone1, input.phone2, input.phone3').keypress(validateForm); // end blur()
           
         
       // Теперь отправим наше письмо
