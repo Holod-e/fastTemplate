@@ -38,7 +38,7 @@
                break;
                // Проверка поля "Телефон "
                case 'phone':
-                   if(val != '' && val.length <= 10)
+                   if(val != '' && val.length >= 10)
                    {
                      $(this).removeClass('error');
                       $(this).addClass('not_error');
