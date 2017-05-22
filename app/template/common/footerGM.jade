@@ -587,28 +587,28 @@ script.
 <!-- END Validation script -->
 
 <!--auto country code srcipt -->
-script.
-	$(window).load(function()
-	{
-		jQuery("#user-city").text(ymaps.geolocation.city);
-		jQuery("#user-region").text(ymaps.geolocation.region);
-		jQuery("#user-country").text(ymaps.geolocation.country);
-		if (getCookie("phone1"))
-		{
-			$("input.phone").val(getCookie("phone"));
-		}
-		else if (ymaps.geolocation.country === 'Украина')
-		{
-			$('input.phone').val('+38');
-		}
-		else if (ymaps.geolocation.country === "Россия")
-		{
-			$('input.phone').val('+7');
-		}
-		else
-		{
-			$('input.phone').val('+37');
-		}
-	});
-script(src="//api-maps.yandex.ru/2.0-stable/?load=package.standard&lang=ru-RU")
+//- script.
+//- 	$(window).load(function()
+//- 	{
+//- 		jQuery("#user-city").text(ymaps.geolocation.city);
+//- 		jQuery("#user-region").text(ymaps.geolocation.region);
+//- 		jQuery("#user-country").text(ymaps.geolocation.country);
+//- 		if (getCookie("phone1"))
+//- 		{
+//- 			$("input.phone").val(getCookie("phone"));
+//- 		}
+//- 		else if (ymaps.geolocation.country === 'Украина')
+//- 		{
+//- 			$('input.phone').val('+38');
+//- 		}
+//- 		else if (ymaps.geolocation.country === "Россия")
+//- 		{
+//- 			$('input.phone').val('+7');
+//- 		}
+//- 		else
+//- 		{
+//- 			$('input.phone').val('+37');
+//- 		}
+//- 	});
+//- script(src="//api-maps.yandex.ru/2.0-stable/?load=package.standard&lang=ru-RU")
 <!-- end auto country code script -->
