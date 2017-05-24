@@ -457,27 +457,24 @@
         };
     </script>
     <!-- END Validation script -->
-    <!--auto country code srcipt 
-			Commented becouse not work in UA
-		-->
-    <!--<script>
-				$(window).load(function() {
-						jQuery("#user-city").text(ymaps.geolocation.city);
-						jQuery("#user-region").text(ymaps.geolocation.region);
-						jQuery("#user-country").text(ymaps.geolocation.country);
-						if (getCookie("phone")) {
-								$("input.phone").val(getCookie("phone"));
-						} else if (ymaps.geolocation.country === 'Украина') {
-								$('input.phone').val('+38');
-						} else if (ymaps.geolocation.country === "Россия") {
-								$('input.phone').val('+7');
-						} else {
-								$('input.phone').val('+37');
-						}
-				});
-		</script>
-		<script src="//api-maps.yandex.ru/2.0-stable/?load=package.standard&amp;lang=ru-RU"></script>-->
-    <!-- end auto country code script -->
+    <!--auto country code srcipt -->
+    <script>
+        $(window).load(function() {
+            $.getJSON('https://ipinfo.io', function(data) {
+                var country = data.country;
+                if (getCookie("phone")) {
+                    $("input.phone").val(getCookie("phone"));
+                } else if (country === 'UA') {
+                    $('input.phone').val('+38');
+                } else if (country === "RU") {
+                    $('input.phone').val('+7');
+                } else {
+                    $('input.phone').val('+37');
+                }
+            });
+        });
+    </script>
+    <!--end auto country code srcipt -->
 </body>
 
 </html>
