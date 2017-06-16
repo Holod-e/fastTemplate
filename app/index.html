@@ -459,21 +459,31 @@
     <!-- END Validation script -->
     <!--auto country code srcipt -->
     <script>
-        $(window).load(function() {
-            $.getJSON('https://ipinfo.io', function(data) {
-                var country = data.country;
-                if (getCookie("phone")) {
-                    $("input.phone").val(getCookie("phone"));
-                } else if (country === 'UA') {
-                    $('input.phone').val('+38');
-                } else if (country === "RU") {
-                    $('input.phone').val('+7');
-                } else {
-                    $('input.phone').val('+37');
-                }
+          $(window).load(function()
+          {
+            $.getJSON('https://freegeoip.net/json/', function(data)
+            {
+              var country = data.country_code;
+              console.log(country);
+              if (getCookie("phone"))
+              {
+                $("input.phone").val(getCookie("phone"));
+              }
+              else if (country === 'UA')
+              {
+                $('input.phone').val('+38');
+              }
+              else if (country === "RU")
+              {
+                $('input.phone').val('+7');
+              }
+              else
+              {
+                $('input.phone').val('+37');
+              }
             });
-        });
-    </script>
+          });
+        </script>
     <!--end auto country code srcipt -->
 </body>
 
