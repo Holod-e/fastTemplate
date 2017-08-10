@@ -1,19 +1,18 @@
-form#RegistrationForm1.mfrm.m_frm(accept-charset="utf-8" onsubmit="return validate(RegistrationForm1,593);" action="http://www.geniusm360.ru/add_subscriber.html" method="post")
-  p.namelabel
-    |Ваше Имя
-  input.name.f1_name(name='name',type='text',placeholder='Как Вас зовут?',required='')
-  p.namelabel
-    | Ваш E-Mail
-  input.email.f1_email(name='email',type='text',placeholder='Ваш основной E-Mail',required)
-  p.namelabel
-    | Ваш телефон
-  input#phone11.NumGroup.phone1(type="text", name="phone1", maxlength="3",  required="", value="+7")
-  input#phone12.NumGroup.phone2(type="text", name="phone2", maxlength="3", placeholder="123", required="")
-  input#phone13.NumGroup.phone3(type="text", name="phone3", class="NumGroup phone3", maxlength="15", placeholder="4567890", required="")
-  input#last1.last1(type="hidden", name="custom_telephone")
-  input#checktoken(type="hidden", name="campaign_token", value="b7Gq")
-  input#checkrespo(type="hidden", name="thankyou_url", value="https://geniusmarketing.me/intensive/ekb/success/")
-  input(type="hidden", name="email_exists_url", value="https://geniusmarketing.me/intensive/ekb/success/")
-  input(type="hidden", name="forward_data", value="")
-  input(type="hidden", name="start_day", value="0")
-  input.subm1.hvr-grow(type='submit', value='Принять участие')
+form.standart-form(id=formid , accept-charset="utf-8" onsubmit="return validate("+formid+","+idexport+","+gtmPush+");" action="https://www.geniusm360.ru/add_subscriber.html" method="post")
+	.part.part1
+		p.label Ваше имя
+		input.name(name="name", type="text", placeholder="Введите Ваше имя", required="")
+	.part.part2
+		p.label Ваше e-mail
+		input.email(name="email", type="email", placeholder="Введите Ваш e-mail", required="")
+	.part.part3
+		p.label Ваш телефон
+		input.phone#phone(name="phone", type="text", required="")
+	.part.part4
+		input#last1.last1(type="hidden", name="custom_telephone")
+		input#checktoken(type="hidden", name="campaign_token", value=grtoken)
+		input#checkrespo(type="hidden", name="thankyou_url", value=tyurl)
+		input#emailexist(type="hidden", name="email_exists_url", value=emexist)
+		input(type="hidden", name="forward_data", value="")
+		input(type="hidden", name="start_day", value="0")
+	input.btn.subm(type="submit", value="Принять участие")

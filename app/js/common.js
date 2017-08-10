@@ -1,22 +1,17 @@
 $(document).ready(function() {
-	//Check
 
- // инициализируем wow.js
-  if ($(window).width() > 1000) {
-    wow = new WOW(
-      {
-        animateClass: 'animated',
-        offset:       100
-      }
-    );
-    wow.init();
-  }
+ // инициализируем wow.js (Раскоментить если надо wow.js)
+  // if ($(window).width() > 1000) {
+  //   wow = new WOW(
+  //     {
+  //       animateClass: 'animated',
+  //       offset:       100
+  //     }
+  //   );
+  //   wow.init();
+  // }
 
 });
-
-
-
-
 // cookie script
 	 function getCookie(cname) {
           var name = cname + "=";
@@ -63,4 +58,9 @@ var modal = new tingle.modal({
    var modalId = $(this).attr('href');
    modal.setContent($(modalId).html());
    modal.open();
+  });
+
+  $('.btn-anchor').on('click', function(e) {
+    e.preventDefault();
+    anchorScroller(this, 1500);
   });
