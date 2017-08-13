@@ -90,6 +90,7 @@ script.
 			},
 			preferredCountries: ['ua', 'ru', 'by', 'kz']
 		});
+
 	});
 script.
 	$(window).load(function(){
@@ -116,7 +117,9 @@ script.
 					$('#phone').val('+7');
 			}
 			else {
-					$('#phone').val('+37');
+					var countryData = $("#phone").intlTelInput("getSelectedCountryData");
+					var dialCode = countryData.dialCode;
+					$('#phone').val('+' + dialCode);
 			}
 		});
 	})
